@@ -18,13 +18,29 @@ function start(movieTitles) {
             console.log(data);
         })
         //Create variables for the API data call.
-        var movie = 
-        var summary =
-        var releaseDate =
-        var director =
-        var topCast = 
-        var runTime =
-        var rating =
+        var movieImage = data.preferredImage;
+        var summary = data.longDescrioption;
+        var releaseDate = data.ratings[0].releaseDate;
+        var director = data.directors;
+        var topCast = data.topCast;
+        var runTime = data.ratings[0].runTime;
+        var rating = data.ratings[0].code;
+        var theaterName = data.showtimes[0].theatre.name;
+        var time = data.ratings[0].runTime;
+
+        //Create the elements for the movie data.
+        var movieImageEl = ('img');
+        var summaryEl = ('p');
+        var releaseDateEl = ('p');
+        var directorEl = ('p');
+        var topCastEl = ('p');
+        var runTimeEl = ('p');
+        var ratingEl = ('p');
+        var theaterNameEl = ('p');
+        var timeEl = ('p');
+
+        //Set attributes for the elements.
+
     
 }
 
