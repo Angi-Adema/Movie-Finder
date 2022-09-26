@@ -17,7 +17,14 @@ function start(movieTitles) {
         .then(function (data) {
             console.log(data);
         })
-
+        //Create variables for the API data call.
+        var movie = 
+        var summary =
+        var releaseDate =
+        var director =
+        var topCast = 
+        var runTime =
+        var rating =
     
 }
 
@@ -47,5 +54,10 @@ function retrieveLocalStorage() {
     saveHistoryButtons();
 }
 retrieveLocalStorage();
+
+//Function to provide the functionality of the search history buttons.
+function saveHistoryButtons() {
+
+}
 
 
