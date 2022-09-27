@@ -1,11 +1,11 @@
 
-.col{
+.row{
     text-align: center;
     display: inline-block;
     border-radius: 5px;
-    height: 25px;
-    width: 85px;
+    height: 300px;
+    width: 100px;
     margin: 0;
-    margin-bottom: 5px;
+    margin-bottom: 45px;
     margin-left: 5px;
 }
