@@ -2,6 +2,7 @@ var apiKey = '7uwcgjvfwhg6h468vquck77e';
 var searchBtn = document.getElementById('search');
 var userInputCity = document.getElementById('city');
 var userInputDate = document.getElementById('date');
+var movieData = document.getElementById('movielist');
 var date ='2022-09-26';
 
 var searchHistory = [];
@@ -18,8 +19,8 @@ function start(movieTitles) {
             console.log(data);
         })
         //Create variables for the API data call.
-        var movieImage = data.preferredImage;
-        var summary = data.longDescrioption;
+        var movieImage = data.preferredImage;//HOW DO I HANDLE THE MOVIE IMAGE BELOW?
+        var summary = data.longDescription;
         var releaseDate = data.ratings[0].releaseDate;
         var director = data.directors;
         var topCast = data.topCast;
@@ -40,7 +41,28 @@ function start(movieTitles) {
         var timeEl = ('p');
 
         //Set attributes for the elements.
+        movieImageEl.setAttribute('src');
+        summaryEl.setAttribute('class');
+        releaseDateEl.setAttribute('class');
+        directorEl.setAttribute('class');
+        topCastEl.setAttribute('class');
+        runTimeEl.setAttribute('class');
+        ratingEl.setAttribute('class');
+        theaterNameEl.setAttribute('class');
+        timeEl.setAttribute('class');
 
+        //Set content for the attributes.
+        summaryEl.textContent = 'About: ' + summary;
+        releaseDateEl.textContent = 'Release Date: ' + releaseDate;
+        directorEl.textContent = 'Director: ' + director;
+        topCastEl.textContent = 'Top Cast: ' + topCast;
+        runTimeEl.textContent = 'Run-Time: ' + runTime;
+        ratingEl.textContent = 'Rating: ' + rating;
+        theaterNameEl.textContent = 'Theater Name: ' + theaterName;
+        timeEl.textContent = 'Showing Time: ' + time;
+
+        //Append the elements.
+        movieData.append(movieImageEl, summaryEl, releaseDateEl, directorEl, topCastEl, runTimeEl, ratingEl, theaterNameEl, timeEl);
     
 }
 
