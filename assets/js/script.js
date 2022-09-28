@@ -99,26 +99,29 @@ function start(date, lat, lon) {
                     //Must create a for loop to show all showtimes for all movie theaters.
                     for (var p = 0; p < filteredArray.length; p++) {
                         var showtimeHour = showtimeArr[p].dateTime
-                      
+                        //Create variable to link the theater name with the showtimes
                         var theaterName = showtimeArr[m].theatre.name
                        
-
+                        //Create the elements for the theater name and the showtime buttons.
                         var theaterNameEl = document.createElement('p');
 
                         var showtimeBtn = document.createElement('a');
+                        //Create the attributes for the showtime buttons, links in the buttons and open in a new broweser tab once the button/link is selected.
                         showtimeBtn.setAttribute('class', 'waves-effect waves-light btn-small')
                         showtimeBtn.setAttribute('href', showtimeArr[p].ticketURI)
                         showtimeBtn.setAttribute('target', '_blank')
+                        //Set content for the theater name and showtimes.
                         theaterNameEl.textContent = theaterName
 
                         showtimeBtn.textContent = showtimeHour
+                        //Append the theater names and showtime buttons to the showtime container.
                         showtimeButtonContainer.append(showtimeBtn)
                         movieTheaterDiv.append(theaterNameEl, showtimeButtonContainer)
                     }
 
 
                 }
-
+                //Create the elements for the movie data from the HTML.
                 var movieDetailDiv = document.createElement('div');
                 var moviesubdiv = document.createElement('div');
                 var movieOuterCard = document.createElement('div');
@@ -136,7 +139,7 @@ function start(date, lat, lon) {
                 var genreEl = document.createElement('p');
                 var ratingEl = document.createElement('p');
 
-
+                //Set the attributes for the movie data.
                 movieDetailDiv.setAttribute('class', 'col m8 dude')
                 movieOuterCard.setAttribute('class', 'col m12 m7')
                 movieCard.setAttribute('class', 'card horizontal')
@@ -145,6 +148,7 @@ function start(date, lat, lon) {
                 cardStackedEl.setAttribute('class', 'card-stacked')
                 cardContent.setAttribute('class', 'card-content')
 
+                //Create the text for the movie data elements.
                 movieTitle.textContent = movieName;
                 movieDescrp.textContent = summary;
                 releaseDateEl.textContent = 'Release Date: ' + releaseDate;
@@ -154,6 +158,7 @@ function start(date, lat, lon) {
                 genreEl.textContent = 'Genre: ' + genreArr;
                 ratingEl.textContent = 'Rating: ' + rating;
 
+                //Append the movie data to the site movie data card.
                 cardContent.append(movieTitle, movieDescrp, releaseDateEl, directorEl, topCastEl, runTimeEl, genreEl, ratingEl)
                 cardStackedEl.append(cardContent)
                 movieImgDiv.append(imgEl)
@@ -162,7 +167,7 @@ function start(date, lat, lon) {
                 moviesubdiv.append(movieOuterCard)
                 movieDetailDiv.append(moviesubdiv)
 
-
+                //Append movie data containers.
                 theaterContainer.append(movieTheaterDiv)
                 showtimeContainer.append(theaterContainer)
                 divContainer.append(showtimeContainer, movieDetailDiv)
@@ -181,14 +186,6 @@ function start(date, lat, lon) {
                 // for (var j = 0; j < directorArr.length; j++) {
 
 
-                // }
-                //Create elements for the remaining variables.
-                // var movieImageUrl = ('img');
-                // var summary = ('p');
-                // var releaseDate = ('p');
-                // var runTime = ('p');
-                // var rating = ('p');
-
 
 
 
@@ -196,41 +193,7 @@ function start(date, lat, lon) {
             }
 
 
-            //Create the elements for the movie data.
-
-            // var movieImageEl = ('img');
-            // var summaryEl = ('p');
-            // var releaseDateEl = ('p');
-            // var directorEl = ('p');
-            // var topCastEl = ('p');
-            // var runTimeEl = ('p');
-            // var ratingEl = ('p');
-            // var theaterNameEl = ('p');
-            // var timeEl = ('p');
-
-            //Set attributes for the elements.
-            // movieImageEl.setAttribute('src', movieImageUrl);
-            // summaryEl.setAttribute('class');
-            // releaseDateEl.setAttribute('class');
-            // directorEl.setAttribute('class');
-            // topCastEl.setAttribute('class');
-            // runTimeEl.setAttribute('class');
-            // ratingEl.setAttribute('class');
-            // theaterNameEl.setAttribute('class');
-            // timeEl.setAttribute('class');
-
-            // //Set content for the attributes.
-            // summaryEl.textContent = 'About: ' + summary;
-            // releaseDateEl.textContent = 'Release Date: ' + releaseDate;
-            // directorEl.textContent = 'Director: ' + director;
-            // topCastEl.textContent = 'Top Cast: ' + topCast;
-            // runTimeEl.textContent = 'Run-Time: ' + runTime;
-            // ratingEl.textContent = 'Rating: ' + rating;
-            // theaterNameEl.textContent = 'Theater Name: ' + theaterName;
-            // timeEl.textContent = 'Showing Time: ' + time;
-
-            // //Append the elements.
-            // movieData.append(movieImageEl, summaryEl, releaseDateEl, directorEl, topCastEl, runTimeEl, ratingEl, theaterNameEl, timeEl);
+            
         })
 }
 
