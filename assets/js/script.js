@@ -1,16 +1,18 @@
 var movieApiKey = '7uwcgjvfwhg6h468vquck77e';
 var weatherApiKey = 'aea21397c6d9dfc11ba04ff29f0547e6';
 var searchBtn = document.getElementById('cityDateBtn');
-var userInputCity = document.getElementById('city');
-var userInputDate = document.getElementById('date');
+var userInputCity = document.getElementById('city_name');
+var userInputDate = document.getElementById('date-picker');
 var movieData = document.getElementById('movielist');
-var userDate = '2022-10-04';
+
 
 var searchHistory = [];
 
 function handleUserInput() {
+    var city = userInputCity.value
+    var date = userInputDate.value
 
-    getLatLon(userDate, 'Aurora')
+    getLatLon(date, city)
 }
 
 function getLatLon(date, city) {
@@ -20,7 +22,7 @@ function getLatLon(date, city) {
     })
         .then(function (data) {
             // create variables for lat, lon, cityname
-            console.log(data)
+            // console.log(data)
             var lat = data[0].lat
             var lon = data[0].lon
             start(date, lat, lon)
@@ -39,6 +41,7 @@ function start(date, lat, lon) {
             console.log("original data!!", data);
             // create the main div for our card
 
+
             var divContainer = document.createElement('div');
 
 
@@ -53,7 +56,8 @@ function start(date, lat, lon) {
 
 
                 //Create variables for the API data call.
-                var movieImageUrl = 'http://developer.tmsimg.com/' + data[i].preferredImage + '?api_key=' + movieApiKey;
+                var movieImageUrl = 'http://developer.tmsimg.com/' + data[i].preferredImage.uri + '?api_key=' + movieApiKey;
+                // console.log(movieImageUrl);
                 var summary = data[i].longDescription;
                 var releaseDate = data[i].releaseDate;
                 // will need a for loop
@@ -78,8 +82,10 @@ function start(date, lat, lon) {
                 var movieName = data[i].title;
 
 
-                //Create a loop to loop through the data in order to get the showtimes.
+                
 
+                //Create the elements for the theater name and the showtime buttons.
+                var theaterNameEl = document.createElement('p');
                 showtimeHeading.textContent = 'Showtimes: '
                 for (var m = 0; m < showtimeArr.length; m++) {
                     //Create the elements in the showtimes container.
@@ -89,26 +95,32 @@ function start(date, lat, lon) {
                     var movieTheaterDiv = document.createElement('div');
 
                     var showtimeButtonContainer = document.createElement('div');
+                    //Set the attributes for the elements.
                     showtimeButtonContainer.setAttribute('class', 'row')
                     showtimeContainer.setAttribute('class', 'col m4 showtime')
                     //Must filter the data in order for the showtimes and theater name to show together.
                     const filteredArray = showtimeArr.filter(function (item) {
                         return showtimeArr[m].theatre.name === item.theatre.name
                     })
-
+                    console.log(filteredArray);
                     //Must create a for loop to show all showtimes for all movie theaters.
                     for (var p = 0; p < filteredArray.length; p++) {
-                        var showtimeHour = showtimeArr[p].dateTime
                         //Create variable to link the theater name with the showtimes
-                        var theaterName = showtimeArr[m].theatre.name
-                       
-                        //Create the elements for the theater name and the showtime buttons.
-                        var theaterNameEl = document.createElement('p');
+                        var showtimeHour = showtimeArr[p].dateTime
+                        var theaterName = showtimeArr[p].theatre.name
 
+                        //Element created for the showtime buttons.
                         var showtimeBtn = document.createElement('a');
                         //Create the attributes for the showtime buttons, links in the buttons and open in a new broweser tab once the button/link is selected.
                         showtimeBtn.setAttribute('class', 'waves-effect waves-light btn-small')
-                        showtimeBtn.setAttribute('href', showtimeArr[p].ticketURI)
+                        if (showtimeArr[p].ticketURI) {
+                            showtimeBtn.setAttribute('href', showtimeArr[p].ticketURI)
+                        } else {
+                            var ticketAlert = document.createElement('p')
+                            ticketAlert.textContent = '***Tickets cannot be purchased online for this Movie'
+
+                        }
+
                         showtimeBtn.setAttribute('target', '_blank')
                         //Set content for the theater name and showtimes.
                         theaterNameEl.textContent = theaterName
@@ -116,7 +128,7 @@ function start(date, lat, lon) {
                         showtimeBtn.textContent = showtimeHour
                         //Append the theater names and showtime buttons to the showtime container.
                         showtimeButtonContainer.append(showtimeBtn)
-                        movieTheaterDiv.append(theaterNameEl, showtimeButtonContainer)
+                        movieTheaterDiv.append(theaterNameEl, showtimeButtonContainer, ticketAlert)
                     }
 
 
@@ -145,6 +157,7 @@ function start(date, lat, lon) {
                 movieCard.setAttribute('class', 'card horizontal')
                 movieImgDiv.setAttribute('class', 'card-image')
                 imgEl.setAttribute('src', movieImageUrl)
+                imgEl.setAttribute('alt', movieName + ' poster')
                 cardStackedEl.setAttribute('class', 'card-stacked')
                 cardContent.setAttribute('class', 'card-content')
 
@@ -152,7 +165,7 @@ function start(date, lat, lon) {
                 movieTitle.textContent = movieName;
                 movieDescrp.textContent = summary;
                 releaseDateEl.textContent = 'Release Date: ' + releaseDate;
-                directorEl.textContent = 'Directors: ' + directorArr; 
+                directorEl.textContent = 'Directors: ' + directorArr;
                 topCastEl.textContent = 'Top Cast: ' + topCastArr;
                 runTimeEl.textContent = 'Run Time: ' + runTime;
                 genreEl.textContent = 'Genre: ' + genreArr;
@@ -173,27 +186,12 @@ function start(date, lat, lon) {
                 divContainer.append(showtimeContainer, movieDetailDiv)
 
 
-                // for (var l = 0; l < genreArr.length; l++) {
-
-
-                // }
-
-                // for (var k = 0; k < topCastArr.length; k++) {
-
-
-                // }
-
-                // for (var j = 0; j < directorArr.length; j++) {
-
-
-
-
 
                 movieData.append(divContainer)
             }
 
 
-            
+
         })
 }
 
@@ -202,31 +200,6 @@ searchBtn.addEventListener('click', handleUserInput);
 
 
 
-//Create a function that handles the user input(city & date) to local storage.
-// function saveToLocalStorage(cityAndDate) {
-    //Check for duplicate entries in search.
-//     if (searchHistory.indexOf(cityAndDate) !== -1) {
-//     }
-//     //Push city and date search history to the searchHistory array.
-//     searchHistory.push(cityAndDate);
-//     //Save search history array into local storage.
-//     localStorage.setItem('searchHistory', JSON.stringify('searchHistory'));
-//     saveHistoryButtons();
-// }
 
-// //Function to retrieve saved data in local storage.
-// function retrieveLocalStorage() {
-//     var history = localStorage.getItem('searchHistory');
-//     if (history) {
-//         searchHistory = JSON.parse(history)
-//     }
-//     saveHistoryButtons();
-// }
-// retrieveLocalStorage();
-
-// //Function to provide the functionality of the search history buttons.
-// function saveHistoryButtons() {
-
-// }
 
 
