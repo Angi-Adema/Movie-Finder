@@ -78,11 +78,11 @@ function start(date, lat, lon) {
                 var movieName = data[i].title;
 
 
-
+                //Create a loop to loop through the data in order to get the showtimes.
 
                 showtimeHeading.textContent = 'Showtimes: '
                 for (var m = 0; m < showtimeArr.length; m++) {
-
+                    //Create the elements in the showtimes container.
                     var showtimeContainer = document.createElement('div');
 
                     var theaterContainer = document.createElement('div');
@@ -91,12 +91,12 @@ function start(date, lat, lon) {
                     var showtimeButtonContainer = document.createElement('div');
                     showtimeButtonContainer.setAttribute('class', 'row')
                     showtimeContainer.setAttribute('class', 'col m4 showtime')
-
+                    //Must filter the data in order for the showtimes and theater name to show together.
                     const filteredArray = showtimeArr.filter(function (item) {
                         return showtimeArr[m].theatre.name === item.theatre.name
                     })
 
-                    
+                    //Must create a for loop to show all showtimes for all movie theaters.
                     for (var p = 0; p < filteredArray.length; p++) {
                         var showtimeHour = showtimeArr[p].dateTime
                       
