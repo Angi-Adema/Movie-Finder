@@ -75,6 +75,7 @@ function start(date, lat, lon) {
                 var genreArr = data[i].genres;
                 // will need to loop showtimes before we can get the theater name
                 var showtimeArr = data[i].showtimes;
+                var movieName = data[i].title;
 
 
 
@@ -135,6 +136,7 @@ function start(date, lat, lon) {
                 var genreEl = document.createElement('p');
                 var ratingEl = document.createElement('p');
 
+
                 movieDetailDiv.setAttribute('class', 'col m8 dude')
                 movieOuterCard.setAttribute('class', 'col m12 m7')
                 movieCard.setAttribute('class', 'card horizontal')
@@ -143,14 +145,14 @@ function start(date, lat, lon) {
                 cardStackedEl.setAttribute('class', 'card-stacked')
                 cardContent.setAttribute('class', 'card-content')
 
-                movieTitle.textContent = "Barbairan"
+                movieTitle.textContent = movieName;
                 movieDescrp.textContent = summary;
-                releaseDateEl.textContent = releaseDate
-                directorEl.textContent = 'somebody'
-                topCastEl.textContent = 'people'
-                runTimeEl.textContent = runTime;
-                genreEl.textContent = 'genre'
-                ratingEl.textContent = rating
+                releaseDateEl.textContent = 'Release Date: ' + releaseDate;
+                directorEl.textContent = 'Directors: ' + directorArr; 
+                topCastEl.textContent = 'Top Cast: ' + topCastArr;
+                runTimeEl.textContent = 'Run Time: ' + runTime;
+                genreEl.textContent = 'Genre: ' + genreArr;
+                ratingEl.textContent = 'Rating: ' + rating;
 
                 cardContent.append(movieTitle, movieDescrp, releaseDateEl, directorEl, topCastEl, runTimeEl, genreEl, ratingEl)
                 cardStackedEl.append(cardContent)
