@@ -4,7 +4,7 @@ var searchBtn = document.getElementById('cityDateBtn');
 var userInputCity = document.getElementById('city');
 var userInputDate = document.getElementById('date');
 var movieData = document.getElementById('movielist');
-var userDate = '2022-09-28';
+var userDate = '2022-10-04';
 
 var searchHistory = [];
 
@@ -233,6 +233,7 @@ function start(date, lat, lon) {
             // movieData.append(movieImageEl, summaryEl, releaseDateEl, directorEl, topCastEl, runTimeEl, ratingEl, theaterNameEl, timeEl);
         })
 }
+
 
 searchBtn.addEventListener('click', handleUserInput);
 
