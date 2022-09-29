@@ -103,6 +103,7 @@ function start(date, lat, lon) {
                         //Create variable to link the theater name with the showtimes
                         var showtimeHour = showtimeArr[p].dateTime
                         var showtimeMin= showtimeArr[p].dateTime
+                        //Convert the showtimes to regular time.
                         showtimeHour = showtimeHour.substring(11,showtimeHour.length -3)
                         showtimeMin = showtimeMin.substring(14,showtimeMin.length)
 
