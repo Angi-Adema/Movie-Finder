@@ -39,17 +39,15 @@ function start(date, lat, lon) {
 
         .then(function (data) {
             console.log("original data!!", data);
+            movieData.innerHTML = ''
             // create the main div for our card
-
-
             var divContainer = document.createElement('div');
-
-
-
-            divContainer.setAttribute('class', 'row hello')
             var showtimeHeading = document.createElement('h2');
-            divContainer.append(showtimeHeading)
 
+            //Set the attribute.
+            divContainer.setAttribute('class', 'row hello')
+            //Append
+            divContainer.append(showtimeHeading)
 
 
             for (var i = 0; i < data.length; i++) {
@@ -60,12 +58,9 @@ function start(date, lat, lon) {
                 // console.log(movieImageUrl);
                 var summary = data[i].longDescription;
                 var releaseDate = data[i].releaseDate;
-                // will need a for loop
                 var directorArr = data[i].directors;
-                // will need a for loop
                 var topCastArr = data[i].topCast;
                 var runTime = data[i].runTime;
-
                 var ratingArr = data[i].ratings;
                 var rating;
 
@@ -74,39 +69,70 @@ function start(date, lat, lon) {
                 } else {
                     rating = 'NR'
                 }
-
-                // will need a for loop
                 var genreArr = data[i].genres;
                 // will need to loop showtimes before we can get the theater name
                 var showtimeArr = data[i].showtimes;
                 var movieName = data[i].title;
 
-
+                
                 
 
                 //Create the elements for the theater name and the showtime buttons.
                 var theaterNameEl = document.createElement('p');
                 showtimeHeading.textContent = 'Showtimes: '
                 for (var m = 0; m < showtimeArr.length; m++) {
+
                     //Create the elements in the showtimes container.
                     var showtimeContainer = document.createElement('div');
-
                     var theaterContainer = document.createElement('div');
                     var movieTheaterDiv = document.createElement('div');
-
                     var showtimeButtonContainer = document.createElement('div');
+
                     //Set the attributes for the elements.
                     showtimeButtonContainer.setAttribute('class', 'row')
                     showtimeContainer.setAttribute('class', 'col m4 showtime')
+
                     //Must filter the data in order for the showtimes and theater name to show together.
                     const filteredArray = showtimeArr.filter(function (item) {
                         return showtimeArr[m].theatre.name === item.theatre.name
                     })
                     console.log(filteredArray);
+
                     //Must create a for loop to show all showtimes for all movie theaters.
                     for (var p = 0; p < filteredArray.length; p++) {
                         //Create variable to link the theater name with the showtimes
                         var showtimeHour = showtimeArr[p].dateTime
+                        var showtimeMin= showtimeArr[p].dateTime
+                        showtimeHour = showtimeHour.substring(11,showtimeHour.length -3)
+                        showtimeMin = showtimeMin.substring(14,showtimeMin.length)
+
+                        // showtimeHour = ((showtimeHour + 11) % 12 +1);
+                        if(showtimeHour === '13'){
+                            showtimeHour= "1"
+                        }else if(showtimeHour === '14'){
+                            showtimeHour= "2"
+                        }else if(showtimeHour === '15'){
+                        showtimeHour= "3"
+                    }else if(showtimeHour === '16'){
+                        showtimeHour= "4"
+                    }else if(showtimeHour === '17'){
+                        showtimeHour= "5"
+                    }else if(showtimeHour === '18'){
+                        showtimeHour= "6"
+                    }else if(showtimeHour === '19'){
+                        showtimeHour= "7"
+                    }else if(showtimeHour === '20'){
+                        showtimeHour= "8"
+                    }else if(showtimeHour === '21'){
+                        showtimeHour= "9"
+                    }else if(showtimeHour === '22'){
+                        showtimeHour= "10"
+                    }else if(showtimeHour === '23'){
+                        showtimeHour= "11"
+                    }else if(showtimeHour === '0'){
+                        showtimeHour= "12"
+                    }
+
                         var theaterName = showtimeArr[p].theatre.name
 
                         //Element created for the showtime buttons.
@@ -117,18 +143,19 @@ function start(date, lat, lon) {
                             showtimeBtn.setAttribute('href', showtimeArr[p].ticketURI)
                         } else {
                             var ticketAlert = document.createElement('p')
+                            showtimeBtn.setAttribute('class', 'waves-effect waves-light btn-small red')
                             ticketAlert.textContent = '***Tickets cannot be purchased online for this Movie'
-
+                            showtimeButtonContainer.append(ticketAlert)
                         }
 
                         showtimeBtn.setAttribute('target', '_blank')
                         //Set content for the theater name and showtimes.
                         theaterNameEl.textContent = theaterName
 
-                        showtimeBtn.textContent = showtimeHour
+                        showtimeBtn.textContent = showtimeHour + ':'+ showtimeMin + 'pm'
                         //Append the theater names and showtime buttons to the showtime container.
                         showtimeButtonContainer.append(showtimeBtn)
-                        movieTheaterDiv.append(theaterNameEl, showtimeButtonContainer, ticketAlert)
+                        movieTheaterDiv.append(theaterNameEl, showtimeButtonContainer)
                     }
 
 
