@@ -6,6 +6,7 @@ var userInputDate = document.getElementById('date-picker');
 var movieData = document.getElementById('movielist');
 
 
+
 var searchHistory = [];
 
 function handleUserInput() {
@@ -14,6 +15,7 @@ function handleUserInput() {
 
     getLatLon(date, city)
 }
+
 
 function getLatLon(date, city) {
     var url = 'https://api.openweathermap.org/geo/1.0/direct?q=' + city + '&appid=' + weatherApiKey;
@@ -74,8 +76,8 @@ function start(date, lat, lon) {
                 var showtimeArr = data[i].showtimes;
                 var movieName = data[i].title;
 
-                
-                
+
+
 
                 //Create the elements for the theater name and the showtime buttons.
                 var theaterNameEl = document.createElement('p');
@@ -102,37 +104,37 @@ function start(date, lat, lon) {
                     for (var p = 0; p < filteredArray.length; p++) {
                         //Create variable to link the theater name with the showtimes
                         var showtimeHour = showtimeArr[p].dateTime
-                        var showtimeMin= showtimeArr[p].dateTime
+                        var showtimeMin = showtimeArr[p].dateTime
                         //Convert the showtimes to regular time.
-                        showtimeHour = showtimeHour.substring(11,showtimeHour.length -3)
-                        showtimeMin = showtimeMin.substring(14,showtimeMin.length)
+                        showtimeHour = showtimeHour.substring(11, showtimeHour.length - 3)
+                        showtimeMin = showtimeMin.substring(14, showtimeMin.length)
 
                         // showtimeHour = ((showtimeHour + 11) % 12 +1);
-                        if(showtimeHour === '13'){
-                            showtimeHour= "1"
-                        }else if(showtimeHour === '14'){
-                            showtimeHour= "2"
-                        }else if(showtimeHour === '15'){
-                        showtimeHour= "3"
-                    }else if(showtimeHour === '16'){
-                        showtimeHour= "4"
-                    }else if(showtimeHour === '17'){
-                        showtimeHour= "5"
-                    }else if(showtimeHour === '18'){
-                        showtimeHour= "6"
-                    }else if(showtimeHour === '19'){
-                        showtimeHour= "7"
-                    }else if(showtimeHour === '20'){
-                        showtimeHour= "8"
-                    }else if(showtimeHour === '21'){
-                        showtimeHour= "9"
-                    }else if(showtimeHour === '22'){
-                        showtimeHour= "10"
-                    }else if(showtimeHour === '23'){
-                        showtimeHour= "11"
-                    }else if(showtimeHour === '0'){
-                        showtimeHour= "12"
-                    }
+                        if (showtimeHour === '13') {
+                            showtimeHour = "1"
+                        } else if (showtimeHour === '14') {
+                            showtimeHour = "2"
+                        } else if (showtimeHour === '15') {
+                            showtimeHour = "3"
+                        } else if (showtimeHour === '16') {
+                            showtimeHour = "4"
+                        } else if (showtimeHour === '17') {
+                            showtimeHour = "5"
+                        } else if (showtimeHour === '18') {
+                            showtimeHour = "6"
+                        } else if (showtimeHour === '19') {
+                            showtimeHour = "7"
+                        } else if (showtimeHour === '20') {
+                            showtimeHour = "8"
+                        } else if (showtimeHour === '21') {
+                            showtimeHour = "9"
+                        } else if (showtimeHour === '22') {
+                            showtimeHour = "10"
+                        } else if (showtimeHour === '23') {
+                            showtimeHour = "11"
+                        } else if (showtimeHour === '0') {
+                            showtimeHour = "12"
+                        }
 
                         var theaterName = showtimeArr[p].theatre.name
 
@@ -153,7 +155,7 @@ function start(date, lat, lon) {
                         //Set content for the theater name and showtimes.
                         theaterNameEl.textContent = theaterName
 
-                        showtimeBtn.textContent = showtimeHour + ':'+ showtimeMin + 'pm'
+                        showtimeBtn.textContent = showtimeHour + ':' + showtimeMin + 'pm'
                         //Append the theater names and showtime buttons to the showtime container.
                         showtimeButtonContainer.append(showtimeBtn)
                         movieTheaterDiv.append(theaterNameEl, showtimeButtonContainer)
