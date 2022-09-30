@@ -33,7 +33,7 @@ function getLatLon(date, city) {
 
 //Create a function to pull in current and upcoming movie titles from API.
 function start(date, lat, lon) {
-    var url = 'http://data.tmsapi.com/v1.1/movies/showings?startDate=' + date + '&lat=' + lat + '&lng=' + lon + '&api_key=7uwcgjvfwhg6h468vquck77e';
+    var url = 'https://data.tmsapi.com/v1.1/movies/showings?startDate=' + date + '&lat=' + lat + '&lng=' + lon + '&api_key=7uwcgjvfwhg6h468vquck77e';
 
     fetch(url).then(function (response) {
         return response.json();
@@ -56,7 +56,7 @@ function start(date, lat, lon) {
 
 
                 //Create variables for the API data call.
-                var movieImageUrl = 'http://developer.tmsimg.com/' + data[i].preferredImage.uri + '?api_key=' + movieApiKey;
+                var movieImageUrl = 'https://developer.tmsimg.com/' + data[i].preferredImage.uri + '?api_key=' + movieApiKey;
                 // console.log(movieImageUrl);
                 var summary = data[i].longDescription;
                 var releaseDate = data[i].releaseDate;
