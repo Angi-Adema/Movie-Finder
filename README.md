@@ -4,7 +4,7 @@
 
 We built this site to provide the user a way to search for local movie showings in the area they travel to or live in to view local theater locations and movie showtimes. Simply click the time button link and be taken to a separate site where tickets can be purchased. The user will input a city and a date in order to view local showings and a list of theater options. The technologies used to build this site were the Gracenote Developer and OpenWeather APIs, Materialize CSS framework and JavaScript.
 
-![Movie Finder](./assets/images/)
+![Movie Finder](./assets/images/movie-finderSS.png)
 
 [Deployed Site](https://angi-adema.github.io/Movie-Finder/)
 
