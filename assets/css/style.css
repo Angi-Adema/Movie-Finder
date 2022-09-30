@@ -1,0 +1,14 @@
+.btn-small{
+    background-color: gray;
+    border-radius: 30rem;
+}
+
+.movieView{
+    height: 700px;
+    overflow: auto;
+}
+
+.card-content p {
+    padding-bottom: 12px;
+}
+
